@@ -41,7 +41,7 @@ class TfliteModel:
             resize_size = (resize_input_shape[1], round(pil_image.height * x_ratio))
         else:
             resize_size = (round(pil_image.width * y_ratio), resize_input_shape[0])
-        resize_pil_image = pil_image.resize(resize_size)
+        resize_pil_image = pil_image.resize((int(resize_size[0]), int(resize_size[1])))
         resize_image = np.array(resize_pil_image)
         output_image[:resize_image.shape[0], :resize_image.shape[1], :] = resize_image
         return output_image, (resize_input_shape[1] / resized_scale, resize_input_shape[0] / resized_scale)
